@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_230139) do
+ActiveRecord::Schema.define(version: 2018_11_04_150137) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "line1"
@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 2018_11_03_230139) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["status_id"], name: "index_orders_on_status_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "name"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "platforms", force: :cascade do |t|
