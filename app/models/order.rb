@@ -4,4 +4,7 @@ class Order < ApplicationRecord
 
   has_many :items
   has_many :games, through: :items
+
+  validates :order_date, presence: true
+
 end
