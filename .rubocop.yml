@@ -20,3 +20,5 @@ AllCops:
     - 'config/environments/*'
     - 'bin/*'
     - 'Gemfile'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
