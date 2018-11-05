@@ -7,6 +7,8 @@ class Game < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true,  numericality: true
 
+  mount_uploader :image, ImageUploader
+
   def display_name
     "#{self.name} - #{self.platform.name}"
   end
