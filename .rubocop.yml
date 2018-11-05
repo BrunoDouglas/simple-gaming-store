@@ -1,0 +1,22 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 180
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/NumericLiterals:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 110
+
+AllCops:
+  Exclude:
+    - 'config/*'
+    - 'config/initializers/*'
+    - 'config/environments/*'
+    - 'bin/*'
+    - 'Gemfile'

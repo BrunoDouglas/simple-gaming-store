@@ -1,3 +1,4 @@
+# City Model
 class City < ApplicationRecord
   belongs_to :province
 

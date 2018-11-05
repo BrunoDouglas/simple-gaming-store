@@ -1,3 +1,4 @@
+# Order Model
 class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :status
@@ -8,6 +9,10 @@ class Order < ApplicationRecord
   validates :order_date, presence: true
 
   def display_name
-    "Order##{self.id} - Customer: #{customer.name}"
+    "Order##{id} - Customer: #{customer.name}"
+  end
+
+  def total
+    items.map { (x.price * x.quantity) }.sum
   end
 end

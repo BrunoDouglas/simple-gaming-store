@@ -1,3 +1,4 @@
+# Game Model
 class Game < ApplicationRecord
   belongs_to :platform
 
@@ -5,12 +6,11 @@ class Game < ApplicationRecord
   has_many :orders, through: :items
 
   validates :name, presence: true
-  validates :price, presence: true,  numericality: true
+  validates :price, presence: true, numericality: true
 
   mount_uploader :image, ImageUploader
 
   def display_name
-    "#{self.name} - #{self.platform.name}"
+    "#{name} - #{platform.name}"
   end
-
 end
