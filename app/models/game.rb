@@ -7,4 +7,8 @@ class Game < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true,  numericality: true
 
+  def display_name
+    "#{self.name} - #{self.platform.name}"
+  end
+
 end

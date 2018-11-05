@@ -7,4 +7,7 @@ class Order < ApplicationRecord
 
   validates :order_date, presence: true
 
+  def display_name
+    "Order##{self.id} - Customer: #{customer.name}"
+  end
 end
