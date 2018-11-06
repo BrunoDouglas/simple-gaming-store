@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  get 'about', to: "pages#about"
-  get 'contact', to: "pages#contact"
+  get 'platforms/index'
+  get 'platforms/show'
+  get 'games/show'
+  get '/about', to: "pages#about"
+  get '/contact', to: "pages#contact"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  #resources :students, only: [:index, :show]
+
+
+  resources :games, only: [:show]
+  resources :platforms, only: [:index, :show]
 
   root 'pages#main'
 end

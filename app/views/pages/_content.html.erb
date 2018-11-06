@@ -1,2 +1,11 @@
-<h1><%= @content.name.capitalize %></h1>
-<%= @content.content.html_safe %>
+<!-- section title -->
+  <div class="col-md-12">
+    <div class="section-title">
+      <h2 class="title"><%= @content.name.capitalize %></h2>
+    </div>
+  </div>
+<!-- /section title -->
+<!-- Product Single -->
+  <div class="col-md-12 ">
+    <%= @content.content.html_safe %>
+  </div>

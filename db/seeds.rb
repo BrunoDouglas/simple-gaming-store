@@ -9,3 +9,12 @@ Platform.destroy_all
 AdminUser.destroy_all
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+Loading Plaftorms
+file = File.read('db/datasources/platforms.json')
+count = 1
+JSON.parse(file).map {|x| x['data']['platforms']}.each do |n|
+  platform = Platform.create(:name => n[count.to_s]['name'])
+  count += 1
+  puts "Created: #{platform.name}"
+end

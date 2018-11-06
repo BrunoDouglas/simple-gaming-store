@@ -1,5 +1,3 @@
-<ul>
-  <%= @products.each do |n| %>
-    <li><%=n.name%></li>
-  <% end %>
-</ul>
+<%= render partial: 'products',
+           object: @products,
+           locals: { section_title: 'Latest Products' } %>

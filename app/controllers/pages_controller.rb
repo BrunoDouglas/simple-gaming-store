@@ -2,9 +2,7 @@
 class PagesController < ApplicationController
   def main
     page = 1
-
     page = params[:page] if request.get?
-
     @products = Game.order(:name).page(page).per(5)
   end
 

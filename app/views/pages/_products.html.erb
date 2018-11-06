@@ -1,0 +1,26 @@
+<!-- section title -->
+<div class="col-md-12">
+  <div class="section-title">
+    <h2 class="title"><%=section_title%></h2>
+  </div>
+</div>
+<!-- section title -->
+<% @products.each do |n| %>
+  <!-- Product Single -->
+  <div class="col-md-3 col-sm-6 col-xs-6">
+    <div class="product product-single">
+      <div class="product-thumb">
+        <%= image_tag n.image.url() %>
+
+      </div>
+      <div class="product-body">
+        <div><a href="#"><%= link_to n.platform.name, n.platform %></div>
+        <h3 class="product-price">$<%=n.price%></h3>
+        <h2 class="product-name"><%= link_to n.name, n %></h2>
+      </div>
+    </div>
+  </div>
+  <!-- /Product Single -->
+<% end %>
+
+<%= paginate @products %>
