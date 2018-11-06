@@ -37,10 +37,13 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'activeadmin'
 gem 'devise'
+gem "mini_magick"
 gem 'carrierwave', '~> 1.0'
 gem 'rubocop', require: false
 gem 'activeadmin_froala_editor'
-
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
