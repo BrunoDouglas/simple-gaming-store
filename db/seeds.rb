@@ -43,8 +43,7 @@ JSON.parse(file).each do |n|
 end
 
 # Loading Games
-file = File.read('db/datasources/games.json')
+file = File.read('db/datasources/games_1.json')
 JSON.parse(file).each do |n|
-  platform = Platform.find(rand(1..3))
-  Game.create(name: n['game_title'], platform: platform, description: n['overview'], price: 5.99 + Random.rand(21))
+  Game.create(name: n['game_title'], image: n['image'], platform: n['platform'], description: n['description'], price: n['price'])
 end

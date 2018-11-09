@@ -8,6 +8,6 @@ class PlatformsController < ApplicationController
       page = params[:page]
     end
 
-    @products = Game.where(platform: Platform.find(id)).order(:name).page(page).per(5)
+    @products = Game.where(platform: Platform.find(id)).order(:name).page(page).per(8)
   end
 end
