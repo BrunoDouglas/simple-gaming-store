@@ -44,6 +44,7 @@ gem 'activeadmin_froala_editor'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

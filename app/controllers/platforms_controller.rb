@@ -1,5 +1,6 @@
 # PlatformController class
 class PlatformsController < ApplicationController
+  add_breadcrumb "Home", :root_path
   def show
     page = 1
     id = nil
@@ -7,7 +8,8 @@ class PlatformsController < ApplicationController
       id = params[:id]
       page = params[:page]
     end
-
-    @products = Game.where(platform: Platform.find(id)).order(:name).page(page).per(8)
+    @platform = Platform.find(id)
+    @products = Game.where(platform: @platform).order(:name).page(page).per(8)
+    add_breadcrumb @platform.name, @platform
   end
 end

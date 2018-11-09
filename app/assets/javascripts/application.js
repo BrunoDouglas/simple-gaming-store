@@ -40,11 +40,11 @@
   });
 
   $(document).click(function(event) {
-    if (!$(event.target).closest(responsiveNav).length)
+    if (!$(event.target).closest( $('#responsive-nav')).length)
     {
-      if (responsiveNav.hasClass('open'))
+      if ( $('#responsive-nav').hasClass('open'))
       {
-        responsiveNav.removeClass('open');
+        $('#responsive-nav').removeClass('open');
         $('#navigation').removeClass('shadow');
       } else
       {
@@ -60,5 +60,7 @@
       }
     }
   });
+
+
 
 })(jQuery);
