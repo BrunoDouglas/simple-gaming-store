@@ -1,3 +1,4 @@
+# PlatformController class
 class PlatformsController < ApplicationController
   def show
     page = 1

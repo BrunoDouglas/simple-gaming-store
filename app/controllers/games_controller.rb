@@ -1,3 +1,4 @@
+# GamesController class
 class GamesController < ApplicationController
   def show
     id = nil
