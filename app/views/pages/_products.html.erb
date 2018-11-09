@@ -5,22 +5,31 @@
   </div>
 </div>
 <!-- section title -->
-<% @products.each do |n| %>
-  <!-- Product Single -->
-  <div class="col-md-3 col-sm-6 col-xs-6">
-    <div class="product product-single">
-      <div class="product-thumb">
-        <%= image_tag n.image.url() %>
-
-      </div>
-      <div class="product-body">
-        <div><a href="#"><%= link_to n.platform.name, n.platform %></div>
-        <h3 class="product-price">$<%=n.price%></h3>
-        <h2 class="product-name"><%= link_to n.name, n %></h2>
+<div class="row">
+  <% if @products.size == 0 %>
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+      <h3>No Games found</h3>
+    </div>
+  <% end %>
+  <% @products.each_with_index do |n, index| %>
+    <!-- Product Single -->
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <div class="product product-single">
+        <a href="/games/<%= n.id %>">
+          <div class="product-thumb">
+            <%= image_tag n.image.url() unless n.image.url() == nil %>
+            <%= image_tag "/img/placeholder_games_cover.png" if n.image.url() == nil %>
+          </div>
+          <div class="product-body">
+            <div><a href="#"><%= link_to n.platform.name, n.platform %></div>
+            <h3 class="product-price">$<%=n.price%></h3>
+            <h2 class="product-name"><%= link_to n.name, n %></h2>
+          </div>
+        </a>
       </div>
     </div>
-  </div>
-  <!-- /Product Single -->
-<% end %>
-
+    <!-- /Product Single -->
+    <%= "</div><div class='row'>".html_safe if (index+1) % 4 == 0 %>
+  <% end %>
+</div>
 <%= paginate @products %>

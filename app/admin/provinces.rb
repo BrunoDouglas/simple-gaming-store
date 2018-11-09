@@ -1,3 +1,3 @@
 ActiveAdmin.register Province do
-  permit_params :name, :tax_percent
+  permit_params :name, :pst, :gst, :hst
 end

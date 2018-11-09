@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'platforms/index'
-  get 'platforms/show'
-  get 'games/show'
-  get '/about', to: "pages#about"
-  get '/contact', to: "pages#contact"
+
+  get 'search',   to: 'search#index'
+  get '/about',   to: 'pages#about'
+  get '/contact', to: 'pages#contact'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

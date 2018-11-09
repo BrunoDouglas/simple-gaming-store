@@ -1,0 +1,80 @@
+[
+  {
+    "province": "Alberta",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0
+  },
+  {
+    "province": "British Columbia (BC)",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0.07
+  },
+  {
+    "province": "Manitoba",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0.08
+  },
+  {
+    "province": "New-Brunswick",
+    "hst"     : true,
+    "gst"     : 0.05,
+    "pst"     : 0.10
+  },
+  {
+    "province": "Newfoundland and Labrador",
+    "hst"     : true,
+    "gst"     : 0.05,
+    "pst"     : 0.10
+  },
+  {
+    "province": "Northwest Territories",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0
+  },
+  {
+    "province": "Nova Scotia",
+    "hst"     : true,
+    "gst"     : 0.05,
+    "pst"     : 0.10
+  },
+  {
+    "province": "Nunavut",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0
+  },
+  {
+    "province": "Ontario",
+    "hst"     : true,
+    "gst"     : 0.05,
+    "pst"     : 0.08
+  },
+  {
+    "province": "Prince Edward Island (PEI)",
+    "hst"     : true,
+    "gst"     : 0.05,
+    "pst"     : 0.10
+  },
+  {
+    "province": "Québec",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0.9975
+  },
+  {
+    "province": "Saskatchewan",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0.06
+  },
+  {
+    "province": "Yukon",
+    "hst"     : false,
+    "gst"     : 0.05,
+    "pst"     : 0
+  }
+]

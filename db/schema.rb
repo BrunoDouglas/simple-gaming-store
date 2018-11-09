@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_155226) do
+ActiveRecord::Schema.define(version: 2018_11_04_154949) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
   create_table "addresses", force: :cascade do |t|
     t.string "line1"
     t.string "postal_code"
-    t.integer "city_id"
+    t.string "city"
+    t.integer "province_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_addresses_on_city_id"
+    t.index ["province_id"], name: "index_addresses_on_province_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -45,14 +46,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
-  end
-
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.integer "province_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["province_id"], name: "index_cities_on_province_id"
   end
 
   create_table "credentials", force: :cascade do |t|
@@ -76,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
+    t.text "description"
     t.integer "platform_id"
     t.decimal "price"
     t.string "image"
@@ -87,11 +81,13 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
   create_table "items", force: :cascade do |t|
     t.integer "order_id"
     t.decimal "price"
+    t.decimal "pst"
+    t.boolean "hst"
+    t.decimal "gst"
     t.integer "quantity"
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "tax"
     t.index ["game_id"], name: "index_items_on_game_id"
     t.index ["order_id"], name: "index_items_on_order_id"
   end
@@ -102,7 +98,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
     t.integer "status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "tax"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["status_id"], name: "index_orders_on_status_id"
   end
@@ -122,7 +117,9 @@ ActiveRecord::Schema.define(version: 2018_11_05_155226) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "name"
-    t.decimal "tax_percent"
+    t.decimal "gst"
+    t.decimal "pst"
+    t.boolean "hst"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

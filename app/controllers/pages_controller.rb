@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def main
     page = 1
     page = params[:page] if request.get?
-    @products = Game.order(:name).page(page).per(5)
+    @products = Game.order(created_at: :desc).page(page).per(8)
   end
 
   def about

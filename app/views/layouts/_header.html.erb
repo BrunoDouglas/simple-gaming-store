@@ -13,15 +13,11 @@
 
         <!-- Search -->
         <div class="header-search">
-          <form>
-            <input class="input search-input" type="text" placeholder="Enter your keyword">
-            <select class="input search-categories">
-              <%=platforms.each do |p|%>
-                <option value="<%=p.id%>"><%=p.name%></option>
-              <% end %>
-            </select>
+          <%=form_tag('/search', method: :get) do %>
+            <%= text_field_tag 'searchInput', params[:searchInput], placeholder: 'Enter your keyword', class: 'input search-input' %>
+            <%= select_tag "searchCategory", options_from_collection_for_select(platforms, "id", "name", params[:searchCategory]), class: 'input search-categories' %>
             <button class="search-btn"><i class="fa fa-search"></i></button>
-          </form>
+          <% end %>
         </div>
         <!-- /Search -->
       </div>

@@ -1,3 +1,3 @@
 ActiveAdmin.register Address do
-  permit_params :line1, :postal_code, :city_id
+  permit_params :line1, :postal_code, :city, :province_id
 end
