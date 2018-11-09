@@ -1,6 +1,6 @@
 # PlatformController class
 class PlatformsController < ApplicationController
-  add_breadcrumb "Home", :root_path
+  add_breadcrumb 'Home', :root_path
   def show
     page = 1
     id = nil

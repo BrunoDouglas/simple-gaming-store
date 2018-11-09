@@ -1,6 +1,6 @@
 # GamesController class
 class GamesController < ApplicationController
-  add_breadcrumb "Home", :root_path
+  add_breadcrumb 'Home', :root_path
 
   def show
     id = nil
