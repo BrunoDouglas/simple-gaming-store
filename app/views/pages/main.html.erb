@@ -1,3 +1,16 @@
+
+
+<%=form_tag('?', method: :get) do %>
+<div class="row">
+<div class="col-md-3">
+  <b>Filter:</b><%= select_tag "filter", options_for_select([ "", "New", "Recently Updated" ], params[:filter]), class: 'input search-categories' %>
+</div>
+<div class="col-md-1">
+  <button class="btn btn-small" style="margin-top: 22px"><i class="fa fa-filter"></i></button>
+</div>
+</div>
+<% end %>
+
 <%= render partial: 'products',
            object: @products,
-           locals: { section_title: 'Latest Products' } %>
+           locals: { section_title: params[:filter] && params[:filter] != '' ? params[:filter] : 'All Games' } %>

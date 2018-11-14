@@ -1,0 +1,68 @@
+<!--  Product Details -->
+<div class="product product-details clearfix">
+  <div class="col-md-12">
+    <div class="order-summary clearfix">
+      <div class="section-title">
+        <h3 class="title">My Cart</h3>
+      </div>
+      <% if @games.size == 0%>
+      <div class="row text-center">
+        <br />
+        <h4>Your cart is empty!</h4>
+      </div>
+      <% else %>
+        <table class="shopping-cart-table table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th></th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
+              <th class="text-right"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @games.each do |g|%>
+              <tr>
+                <td class="thumb">
+                  <%= image_tag g.image.url() unless g.image.url() == nil %>
+                  <%= image_tag "/img/placeholder_games_cover.png" if g.image.url() == nil %>
+                </td>
+                <td class="details">
+                <%= link_to g.name, g%>
+                  <ul>
+                    <li><span>Platform: <%=g.platform.name%></span></li>
+                  </ul>
+                </td>
+                <td class="price text-center"><strong> C$<%=g.price%></strong></td>
+                <%=form_tag('/cart/update/'+ g.id.to_s, method: :get) do %>
+                  <td class="qty text-center"><%=number_field_tag 'qtyNumber', @cart[g.id.to_s], class: 'input' %></td>
+                  <td class="text-left"><button class="main-btn icon-btn"><i class="fa fa-refresh"></i></button></td>
+                <% end %>
+
+                <td class="total text-center"><strong class="primary-color">C$<%=g.price.to_d*@cart[g.id.to_s].to_d%></strong></td>
+                <%=form_tag('/cart/remove/'+ g.id.to_s, method: :get) do %>
+                <td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+                <% end %>
+              </tr>
+            <% end %>
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th>SUBTOTAL</th>
+              <th colspan="2" class="sub-total">C$<%=@total%></th>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="pull-right">
+          <a class="primary-btn" href="/checkout">Checkout</a>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- /Product Details -->

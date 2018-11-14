@@ -10,4 +10,48 @@ class GamesController < ApplicationController
     add_breadcrumb @game.platform.name, @game.platform
     add_breadcrumb @game.name, @game
   end
+
+  def addToCart
+    id = params[:id]
+    cart = session[:cart] || {id => 0}
+
+    cart[id] = cart[id].to_i || 0
+    cart[id] +=  params[:qtyNumber].to_i
+    session[:cart] = cart
+    redirect_to root_path
+  end
+
+  def cart
+    @total = 0
+    @cart = session[:cart]
+    @qty = 0
+    @games = Array.new
+    @cart.each do |id, value|
+      game = Game.find(id)
+      @games << game
+      @total += game.price * value.to_i
+      @qty += value.to_i
+    end
+    add_breadcrumb 'Cart', '/cart'
+  end
+
+  def updateCart
+    id = params[:id]
+    cart = session[:cart] || {id => 0}
+
+
+    return removeCart if params[:qtyNumber].to_i == 0
+
+    cart[id] = cart[id].to_i || 0
+    cart[id] =  params[:qtyNumber].to_i
+    session[:cart] = cart
+    redirect_to '/cart'
+  end
+  def removeCart
+    id = params[:id]
+    cart = session[:cart] || {id => 0}
+    cart.delete_if { |h| !h[id].nil? }
+    session[:cart] = cart
+    redirect_to '/cart'
+  end
 end

@@ -6,7 +6,9 @@ ActiveAdmin.register_page 'Dashboard' do
         panel 'Latest Orders' do
           ul do
             Order.last(5).map do |order|
-              li link_to("# #{order.id} - Customer: #{order.customer.name} - Items: #{order.items.count}", admin_order_path(order))
+              li link_to("# #{order.id} - Customer: #{order.customer.name} -
+                                          Items: #{order.items.count} -
+                                          Total: #{"C$ " + order.items.map { |o| o.price + (o.price * o.gst + o.pst) }.sum().round(2).to_s}", admin_order_path(order))
             end
           end
         end

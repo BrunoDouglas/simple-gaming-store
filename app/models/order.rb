@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
   has_many :items
   has_many :games, through: :items
+  accepts_nested_attributes_for :items, allow_destroy: true
 
   validates :order_date, presence: true
 
