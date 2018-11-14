@@ -34,4 +34,22 @@ class PagesController < ApplicationController
     add_breadcrumb 'Contact', contact_path
     @content = Page.where(name: 'contact').first
   end
+
+  def cart
+    @total = 0
+    @cart = session[:cart]
+    @qty = 0
+    @games = Array.new
+    @cart.each do |id, value|
+      game = Game.find(id)
+      @games << game
+      @total += game.price * value.to_i
+      @qty += value.to_i
+    end
+    add_breadcrumb 'Cart', '/cart'
+  end
+
+  def checkout
+
+  end
 end
