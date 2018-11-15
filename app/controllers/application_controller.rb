@@ -1,12 +1,17 @@
 # ApplicationController class
 class ApplicationController < ActionController::Base
   before_action :load_cart
+  before_action :loggedUser
 
   helper_method :platforms
   def platforms
     @platforms = Platform.all
   end
 
+  def loggedUser
+    userId = session[:userId] || false
+    @loggedUser = userId ? Credential.find(userId) : false
+  end
 
   def load_cart
 

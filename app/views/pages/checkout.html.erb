@@ -1,49 +1,84 @@
 <!--  Checkout Details -->
-<form id="checkout-form" class="clearfix">
-
+  <% if login_message %>
+  <div class="row text-center">
+    <span class="text-info"><%= login_message %></span>
+  </div>
+<% end %>
   <div class="col-md-6">
     <div class="billing-details">
-      <p>Already a customer ? <a href="#">Login</a></p>
-      <div class="section-title">
-        <h3 class="title">Sign Up</h3>
-      </div>
-       <div class="col-md-6">
-        <div class="form-group">
-          <input class="input" type="email" name="email" placeholder="Email">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <input class="input" type="password" name="password" placeholder="Enter Your Password">
-        </div>
-      </div>
-      <div class="form-group">
-        <input class="input" type="text" name="name" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <input class="input" type="text" name="line1" placeholder="Address">
-      </div>
-      <div class="form-group">
-        <input class="input" type="text" name="city" placeholder="City">
-      </div>
-      <div class="form-group">
-        <input class="input" type="text" name="postalCode" placeholder="Postal Code">
-      </div>
-      <div class="form-group">
-        <input class="input" type="tel" name="phone" placeholder="Telephone">
+      <div class="section-title"><h3 class="title">Customer Details</h3></div>
+      <div class="form-group"><p><b>Name: </b>  <%= @customer.name%></p></div>
+      <div class="form-group"><p><b>Age:  </b>  <%= @customer.age%></p></div>
+      <div class="form-group"><p><b>Email:</b>  <%= @customer.credential.email%></p></div>
+      <div class="form-group"><p><b>Phone:</b>  <%= @customer.phone%></p></div>
+      <div class="form-group"><p><b>Address:</b> <%= @customer.address.line1%>,
+                                                <%= @customer.address.city%> -
+                                                <%= @customer.address.province.name%> -
+                                                <%= @customer.address.postal_code%> </p>
       </div>
     </div>
   </div>
 
   <div class="col-md-6">
 
+    <div class="order-summary clearfix">
+      <div class="section-title"><h3 class="title">Order Summary</h3></div>
+        <table class="shopping-cart-table table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th></th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
+              <th class="text-right"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @games.each do |g|%>
+              <tr>
+                <td class="thumb">
+                  <%= image_tag g.image.url() unless g.image.url() == nil %>
+                  <%= image_tag "/img/placeholder_games_cover.png" if g.image.url() == nil %>
+                </td>
+                <td class="details">
+                  <%= g.name%>
+                  <ul>
+                    <li><span>Platform: <%=g.platform.name%></span></li>
+                  </ul>
+                </td>
+                <td class="price text-center"><strong> C$<%=g.price%></strong></td>
+                <td class="qty text-center"><strong> <%=@cart[g.id.to_s]%></strong></td>
+                <td class="total text-center"><strong class="primary-color">C$<%=g.price.to_d*@cart[g.id.to_s].to_d%></strong></td>
+              </tr>
+            <% end %>
 
+          </tbody>
+          <tfoot>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th>SUBTOTAL</th>
+              <th colspan="2" class="sub-total">C$<%=sprintf('%.2f', @total)%></th>
+            </tr>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th><%= @customer.address.province.hst ? 'HST' : 'GST/PST'%></th>
+              <td colspan="2" class="sub-total text-left">C$<%=sprintf('%.2f', @taxes)%></td>
+            </tr>
+            <tr>
+              <th class="empty" colspan="3"></th>
+              <th>TOTAL</th>
+              <th colspan="2" class="total">C$<%=sprintf('%.2f', @taxes+@total)%></th>
+            </tr>
+          </tfoot>
+        </table>
+    </div>
   </div>
 
   <div class="col-md-12">
-      <div class="pull-right">
-          <a class="primary-btn" href="/checkout">Place Order</a>
-        </div>
+    <div class="pull-right">
+        <a class="primary-btn" href="/placeOrder">Place Order</a>
+    </div>
   </div>
 </div>
 <!-- /Checkout Details -->

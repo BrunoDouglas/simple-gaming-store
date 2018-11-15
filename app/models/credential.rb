@@ -7,7 +7,7 @@ end
 # Credential Model
 class Credential < ApplicationRecord
   validates :email, presence: true, uniqueness: true, email: true
-  validates :password, presence: true, length: { in: 3..20 }
+  validates :password, presence: true, length: { in: 3..256 }
   def display_name
     email
   end
