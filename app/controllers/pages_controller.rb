@@ -3,7 +3,7 @@ require 'date'
 # PagesController class
 class PagesController < ApplicationController
   add_breadcrumb 'Home', :root_path
-  add_flash_types :login_message
+  add_flash_types :status_message
 
   def main
     page = 1
@@ -43,22 +43,21 @@ class PagesController < ApplicationController
   def logout
     session[:userId] = nil
     redirect_to '/'
-
   end
 
   def doLogin
     user = Credential.where('email = ? AND password = ?', params[:email], Digest::SHA256.hexdigest(params[:password])).first || false
     if user
       session[:userId] = user.id
-      redirect_to '/checkout', login_message: 'Signed In successfully!'
-    else
-      redirect_to '/login', login_message: "The Customer was not found!"
+      return redirect_to '/checkout', status_message: 'Signed In successfully!'
     end
+
+    return redirect_to '/login', status_message: "The Customer was not found!"
   end
 
   def cart
     @total = 0
-    @cart = session[:cart]
+    @cart = session[:cart] || {}
     @qty = 0
     @games = Array.new
     @cart.each do |id, value|
@@ -72,12 +71,13 @@ class PagesController < ApplicationController
 
   def checkout
     userId = session[:userId] || false
-    if !userId
-      redirect_to '/login'
-    end
+    return redirect_to '/login', status_message: "Please Sign In before proceeding" if !userId
 
     @total = 0
-    @cart = session[:cart]
+    @cart = session[:cart] || {}
+
+    return redirect_to '/', status_message: "Your cart is empty!" if @cart.size == 0
+
     @qty = 0
     @games = Array.new
     @cart.each do |id, value|
@@ -86,8 +86,9 @@ class PagesController < ApplicationController
       @total += game.price * value.to_i
       @qty += value.to_i
     end
-    @customer = Customer.where(credential_id: userId).first
-    @taxes = ((@total * @customer.address.province.gst) + (@total * @customer.address.province.pst)).round(2)
+    @customer = session[:customer]
+    @taxes = ((@total * @customer.address.province.gst) + (@total * @customer.address.province.pst))
+    session[:total] = @total + @taxes
     add_breadcrumb 'Check Out', '/checkout'
   end
 
@@ -102,15 +103,19 @@ class PagesController < ApplicationController
   end
 
   def placeOrder
+    userId = session[:userId] || false
+
+    return redirect_to '/login', status_message: "Please Sign In before proceeding" if !userId
+
     @cart = session[:cart]
-    customer = Customer.where(credential: @loggedUser).first
-    order = Order.create(status_id: 1, customer: customer, order_date: DateTime.now)
+    @customer = session[:customer]
+    order = Order.create(status_id: 1, customer: @customer, order_date: DateTime.now)
 
     @cart.each do |id, value|
       game = Game.find(id)
-      item = Item.create(order: order, price: game.price, gst: customer.address.province.gst, pst: customer.address.province.pst, hst: customer.address.province.hst, quantity: value.to_i, game: game)
+      item = Item.create(order: order, price: game.price, gst: @customer.address.province.gst, pst: @customer.address.province.pst, hst: @customer.address.province.hst, quantity: value.to_i, game: game)
     end
 
-    sss
+    redirect_to '/charges/new'
   end
 end

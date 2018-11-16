@@ -11,12 +11,13 @@ class ApplicationController < ActionController::Base
   def loggedUser
     userId = session[:userId] || false
     @loggedUser = userId ? Credential.find(userId) : false
+    session[:customer] = userId ? Customer.where(credential_id: userId).first : false
   end
 
   def load_cart
 
     @total = 0
-    cart = session[:cart]
+    cart = session[:cart] || {}
     @qty = 0
     cart.each do |id, value|
       game = Game.find(id)

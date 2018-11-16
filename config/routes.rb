@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   get '/games/:id/updateCart',    to: 'games#updateCart'
   get '/games/:id/removeFromCart',to: 'games#removeCart'
   get '/games/:id/addToCart',     to: 'games#addToCart'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   resources :games, only: [:show]
   resources :platforms, only: [:index, :show]
+  resources :charges
 
   root 'pages#main'
 end

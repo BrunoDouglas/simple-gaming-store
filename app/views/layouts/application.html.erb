@@ -42,6 +42,12 @@
       <div class="container">
         <!-- row -->
         <div class="row">
+          <% if defined? status_message %>
+            <div class="row text-center">
+              <span class="text-info"><%= status_message %></span>
+            </div>
+          <% end %>
+
           <!-- CONTENT -->
             <%= yield %>
           <!-- /CONTENT -->
