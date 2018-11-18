@@ -32,7 +32,7 @@ Page.create(name: 'contact', content: '<p>Geske Store is located at 123 Main St,
 file = File.read('db/datasources/provinces.json')
 JSON.parse(file).each do |n|
   province = Province.create(name: n['province'], gst: n['gst'], hst: n['hst'], pst: n['pst'])
-  puts 'Errors: => ' + province.errors.full_messages
+  puts 'Errors: => ' + province.errors.full_messages.inspect
   puts "Created: #{province.name} hst => #{province.hst}"
 end
 
@@ -40,7 +40,7 @@ end
 file = File.read('db/datasources/platforms.json')
 JSON.parse(file).each do |n|
   platform = Platform.create(name: n['name'])
-  puts 'Errors: => ' + platform.errors.full_messages
+  puts 'Errors: => ' + platform.errors.full_messages.inspect
   puts "Created: #{platform.name}"
 end
 
