@@ -13,7 +13,7 @@ Platform.destroy_all
 AdminUser.destroy_all
 Province.destroy_all
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 # Loading About Page
 Page.create(name: 'about', content: '<p>Founded in 1996,
@@ -45,8 +45,8 @@ JSON.parse(file).each do |n|
 end
 
 # Loading Games
-#file = File.read('db/datasources/games_1.json')
-#JSON.parse(file).each do |n|
-#  game = Game.create(name: n['game_title'], image: n['image'], platform: n['platform'], description: n['description'], price: n['price'])
-#  puts 'Errors: => ' + game.errors.full_messages
-#end
+file = File.read('db/datasources/games_1.json')
+JSON.parse(file).each do |n|
+  game = Game.create(name: n['game_title'], image: n['image'], platform: n['platform'], description: n['description'], price: n['price'])
+  puts 'Errors: => ' + game.errors.full_messages
+end
