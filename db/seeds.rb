@@ -45,8 +45,8 @@ JSON.parse(file).each do |n|
 end
 
 # Loading Games
-file = File.read('db/datasources/games_1.json')
-JSON.parse(file).each do |n|
-  game = Game.create(name: n['game_title'], image: n['image'], platform: n['platform'], description: n['description'], price: n['price'])
-  puts 'Errors: => ' + game.errors.full_messages
-end
+#file = File.read('db/datasources/games_1.json')
+#JSON.parse(file).each do |n|
+#  game = Game.create(name: n['game_title'], image: n['image'], platform: n['platform'], description: n['description'], price: n['price'])
+#  puts 'Errors: => ' + game.errors.full_messages
+#end
