@@ -93,11 +93,21 @@ class PagesController < ApplicationController
   end
 
   def doRegister
-    #TODO: how to return error message?
+    errors = false;
     @credentials = Credential.create(email: params[:email], password: Digest::SHA256.hexdigest(params[:password]))
     @address = Address.create(line1: params[:line1], city: params[:city], postal_code: params[:postal_code], province: Province.find(params[:province]))
     @customer = Customer.create(name:  params[:name], age: params[:age], phone: params[:phone], credential: @credentials, address: @address)
 
+    if ( @credentials.errors.size > 0 || @address.errors.size > 0 || @customer.errors.size > 0 ) then
+
+      errors = true
+      flash[:status_message] = "The following Errors prevented the action from completing successfully: " +
+                                (@credentials.errors.size > 0 ? @credentials.errors.full_messages.join(", ") : " " ) +
+                                (@address.errors.size > 0 ? @address.errors.full_messages.join(", ") : " " ) +
+                                (@customer.errors.size > 0 ? @customer.errors.full_messages.join(", ") : " " )
+
+      return redirect_to "/login"
+    end
     session[:userId] = @customer.credential_id
     redirect_to '/checkout'
   end

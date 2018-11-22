@@ -21,12 +21,9 @@ class GamesController < ApplicationController
     redirect_to root_path
   end
 
-
-
   def updateCart
     id = params[:id]
     cart = session[:cart] || {id => 0}
-
 
     return removeCart if params[:qtyNumber].to_i == 0
 
@@ -35,6 +32,7 @@ class GamesController < ApplicationController
     session[:cart] = cart
     redirect_to '/cart'
   end
+
   def removeCart
     id = params[:id]
     cart = session[:cart] || {id => 0}
